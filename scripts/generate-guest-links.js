@@ -13,7 +13,7 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 
-const SITE_URL = process.env.SITE_URL || "https://your-site.vercel.app";
+const SITE_URL = process.env.SITE_URL || "medispharm-invitation.netlify.app";
 
 const csvPath = path.join(__dirname, "..", "data", "guests.csv");
 const jsonOutPath = path.join(__dirname, "..", "data", "guests.json");
