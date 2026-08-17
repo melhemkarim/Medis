@@ -41,7 +41,7 @@ export const event = {
     {
       eyebrow: "Day One",
       heading: "Evening",
-      date: "Friday, September 5",
+      date: "Saturday, September 5",
       items: [{ time: "4:30 PM – Late", label: "Buggy Road Trip & Abaya Night" }],
       dressCode: "Comfy Wear",
       note: "Please bring a jacket",
@@ -49,7 +49,7 @@ export const event = {
     {
       eyebrow: "Day Two",
       heading: "Ride To The Top",
-      date: "Saturday, September 6",
+      date: "Sunday, September 6",
       items: [{ time: "10:00 AM", label: "Breakfast" }],
       dressCode: "Comfy Sport Wear",
       note: "",
