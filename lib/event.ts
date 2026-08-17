@@ -28,7 +28,7 @@ export const event = {
     {
       eyebrow: "Day One",
       heading: "Morning",
-      date: "Friday, September 5",
+      date: "Saturday, September 5",
       items: [
         { time: "9:30 AM", label: "Arrival" },
         { time: "9:30 – 10:30 AM", label: "Breakfast" },
