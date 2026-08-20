@@ -13,7 +13,7 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 
-const SITE_URL = process.env.SITE_URL || "medispharm-invitation.netlify.app";
+const SITE_URL = process.env.SITE_URL || "https://medispharm-invitation.netlify.app";
 
 const csvPath = path.join(__dirname, "..", "data", "guests.csv");
 const jsonOutPath = path.join(__dirname, "..", "data", "guests.json");
@@ -41,8 +41,23 @@ const lines = raw
 // drop header if present
 if (lines[0].toLowerCase() === "name") lines.shift();
 
-const seenSlugs = new Set();
+// Load any previously generated guests so existing names keep their
+// existing slug/link. Only brand-new names get a freshly generated one.
+let existingByName = new Map();
+if (fs.existsSync(jsonOutPath)) {
+  try {
+    const prev = JSON.parse(fs.readFileSync(jsonOutPath, "utf-8"));
+    for (const g of prev) existingByName.set(g.name, g.slug);
+  } catch (e) {
+    console.warn("Could not read existing guests.json, generating all fresh slugs.");
+  }
+}
+
+const seenSlugs = new Set(existingByName.values());
 const guests = lines.map((name) => {
+  if (existingByName.has(name)) {
+    return { name, slug: existingByName.get(name) };
+  }
   let base = slugify(name);
   let slug = `${base}-${shortId()}`;
   while (seenSlugs.has(slug)) slug = `${base}-${shortId()}`;
