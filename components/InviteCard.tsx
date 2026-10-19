@@ -8,8 +8,8 @@ import { event } from "@/lib/event";
 import MusicToggle from "@/components/MusicToggle";
 /**
  * A different photo per screen. Drop your photos into /public/images
- * named exactly photo-1.jpg through photo-5.jpg (date/location, day 1
- * morning, day 1 evening, day 2, RSVP — in that order). Any one that's
+ * named exactly photo-1.jpg through photo-5.jpg (date/location, program,
+ * RSVP — in that order). Any one that's
  * missing just falls back to the generated gradient automatically, so
  * it's safe to add them gradually.
  * (The greeting screen uses the light wave background instead of a photo,
@@ -343,7 +343,7 @@ function BackButton({ onClick }: { onClick: () => void }) {
 }
 
 export default function InviteCard({ name, slug }: { name: string; slug: string }) {
-  const PANEL_COUNT = 7;
+  const PANEL_COUNT = 5;
   const [index, setIndex] = useState(0);
   const [vw, setVw] = useState(0);
   const t = useCountdown(event.isoDateTime);
@@ -380,7 +380,7 @@ export default function InviteCard({ name, slug }: { name: string; slug: string 
       >
         {/* Panel 1 — Greeting */}
 <div className="relative h-full w-screen flex-shrink-0">
-  <ImageBackground src="/backgrounds/panel1-bg-mobile.png" desktopSrc="/backgrounds/panel1-bg-desktop.png" alt="MedisPharm and AWMU invite you to OATH" />
+  <ImageBackground src="/backgrounds/panel1-bg-mobile.jpg" desktopSrc="/backgrounds/panel1-bg-desktop.jpg" alt="MedisPharm and AWMU invite you to OATH" />
   <NextButton onClick={() => goTo(1)} light />
   <Dots count={PANEL_COUNT} index={index} light={index === 0} />
 </div>
@@ -394,7 +394,7 @@ export default function InviteCard({ name, slug }: { name: string; slug: string 
           <Dots count={PANEL_COUNT} index={index} />
         </div>
 
-        {/* Panel 3 — Day One, Morning */}
+        {/* Panel 3 — Program (single day) */}
         <div className="relative h-full w-screen flex-shrink-0">
           <PanelBackground photoIndex={1} active={index === 2} />
           <ScheduleSlide data={event.program[0]} active={index === 2} />
@@ -403,31 +403,13 @@ export default function InviteCard({ name, slug }: { name: string; slug: string 
           <Dots count={PANEL_COUNT} index={index} />
         </div>
 
-        {/* Panel 4 — Day One, Evening */}
+        {/* Panel 4 — Countdown */}
         <div className="relative h-full w-screen flex-shrink-0">
-          <PanelBackground photoIndex={2} active={index === 3} />
-          <ScheduleSlide data={event.program[1]} active={index === 3} />
-          <BackButton onClick={() => goTo(2)} />
-          <NextButton onClick={() => goTo(4)} />
-          <Dots count={PANEL_COUNT} index={index} />
-        </div>
-
-        {/* Panel 5 — Day Two */}
-        <div className="relative h-full w-screen flex-shrink-0">
-          <PanelBackground photoIndex={3} active={index === 4} />
-          <ScheduleSlide data={event.program[2]} active={index === 4} />
-          <BackButton onClick={() => goTo(3)} />
-          <NextButton onClick={() => goTo(5)} />
-          <Dots count={PANEL_COUNT} index={index} />
-        </div>
-
-        {/* Panel 6 — Countdown */}
-        <div className="relative h-full w-screen flex-shrink-0">
-          <VideoBackground src="/images/countdown-bg.mp4" active={index === 5} />
+          <VideoBackground src="/images/countdown-bg.mp4" active={index === 3} />
           <motion.div
             variants={container}
             initial="hidden"
-            animate={index === 5 ? "show" : "hidden"}
+            animate={index === 3 ? "show" : "hidden"}
             className="flex h-full flex-col items-center justify-center px-8 text-center text-white"
           >
             <motion.p variants={item} className="text-xs uppercase tracking-[0.3em] text-white">
@@ -460,30 +442,30 @@ export default function InviteCard({ name, slug }: { name: string; slug: string 
               </motion.p>
             )}
           </motion.div>
-          <BackButton onClick={() => goTo(4)} />
-          <NextButton onClick={() => goTo(6)} />
+          <BackButton onClick={() => goTo(2)} />
+          <NextButton onClick={() => goTo(4)} />
           <Dots count={PANEL_COUNT} index={index} />
         </div>
 
         
 
-        {/* Panel 8 — Guest name + RSVP */}
+        {/* Panel 5 — Guest name + RSVP */}
         <div className="relative h-full w-screen flex-shrink-0">
-  <ImageBackground src="/backgrounds/panel-last-bg-mobile.jpeg" desktopSrc="/backgrounds/panel-last-bg-desktop.png" alt="Because you are at the heart of what we do — MedisPharm Family" />
+  <ImageBackground src="/backgrounds/panel-last-bg-mobile.jpg" desktopSrc="/backgrounds/panel-last-bg-desktop.jpg" alt="Because you are at the heart of what we do — MedisPharm Family" />
   <motion.div
   variants={container}
   initial="hidden"
-  animate={index === 6 ? "show" : "hidden"}
-  className="flex h-full flex-col items-center justify-center px-8 text-center text-[#4e2a6e]"
+  animate={index === 4 ? "show" : "hidden"}
+  className="flex h-full flex-col items-center justify-center px-8 text-center text-[#0b4878]"
 >
-  <motion.p variants={item} className="text-sm uppercase tracking-[0.2em] text-[#4e2a6e]">
+  <motion.p variants={item} className="text-sm uppercase tracking-[0.2em] text-[#0b4878]">
     Dear
   </motion.p>
   <motion.h1 variants={item} className="mt-3 font-display text-4xl italic sm:text-5xl">
     {name}
   </motion.h1>
 
-  <motion.p variants={item} className="mt-6 font-display text-xl italic text-[#4e2a6e]">
+  <motion.p variants={item} className="mt-6 font-display text-xl italic text-[#0b4878]">
     Will you attend?
   </motion.p>
 
@@ -491,7 +473,7 @@ export default function InviteCard({ name, slug }: { name: string; slug: string 
               <RSVPForm name={name} slug={slug} />
             </motion.div>
           </motion.div>
-          <BackButton onClick={() => goTo(6)} />
+          <BackButton onClick={() => goTo(3)} />
           <Dots count={PANEL_COUNT} index={index} />
         </div>
       </motion.div>

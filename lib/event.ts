@@ -4,18 +4,18 @@ export const event = {
   title: "OATH",
   // Tagline shown under the event name on the first screen.
   tagline: "One Aim To Accelerate Healing",
-  dateLabel: "September 5–6, 2026",
+  dateLabel: "November 7, 2026",
   // Plain-text address used to build the embedded map + the "Open in Maps" link.
   // Be as specific as you can — exact address works best.
   mapQuery: "InterContinental Mzaar Lebanon, Mzaar Kfardebian",
   // ISO string, drives the live countdown on screen 3
-  isoDateTime: "2026-09-05T09:30:00+03:00",
+  isoDateTime: "2026-11-07T16:00:00+03:00",
   // The vertical timeline on screen 2 (date / location card). Add as many
   // stops as you need — each gets its own row.
   schedule: [
     {
-      time: "9:30 AM · Sept 5",
-      label: "Arrival",
+      time: "4:00 PM · Nov 7",
+      label: "Welcome Reception",
       venue: "InterContinental Mzaar",
       city: "Mzaar, Lebanon",
     },
@@ -26,32 +26,16 @@ export const event = {
   // dressCode/note empty ("") to hide those lines on that slide.
   program: [
     {
-      eyebrow: "Day One",
-      heading: "Morning",
-      date: "Saturday, September 5",
+      eyebrow: "The Program",
+      heading: "Celebration",
+      date: "Saturday, November 7",
       items: [
-        { time: "9:30 AM", label: "Arrival" },
-        { time: "9:30 – 10:30 AM", label: "Breakfast" },
-        { time: "10:30 AM – 2:00 PM", label: "OATH Standalone" },
-        { time: "2:00 PM – 4:00 PM", label: "Lunch" },
+        { time: "4:00 PM – 4:30 PM", label: "Welcome Reception" },
+        { time: "4:30 PM – 5:00 PM", label: "Certificate Awarding Ceremony" },
+        { time: "5:00 PM – 7:00 PM", label: "Seated Lebanese Lunch" },
+        { time: "7:00 PM", label: "Cake-Cutting Ceremony" },
       ],
-      dressCode: "Sport Chic",
-      note: "",
-    },
-    {
-      eyebrow: "Day One",
-      heading: "Evening",
-      date: "Saturday, September 5",
-      items: [{ time: "4:30 PM – Late", label: "Buggy Road Trip & Abaya Night" }],
-      dressCode: "Comfy Wear",
-      note: "Please bring a jacket",
-    },
-    {
-      eyebrow: "Day Two",
-      heading: "Ride To The Top",
-      date: "Sunday, September 6",
-      items: [{ time: "10:00 AM", label: "Breakfast" }],
-      dressCode: "Comfy Sport Wear",
+      dressCode: "",
       note: "",
     },
   ],
