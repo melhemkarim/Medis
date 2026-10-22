@@ -16,7 +16,7 @@ import MusicToggle from "@/components/MusicToggle";
  * and the countdown screen uses a video — see VideoBackground below.)
  */
 const PHOTOS = [
-  "/images/hotel2.jpeg",
+  "/images/hotel2.png",
   "/images/conf3.jpeg",
   "/images/buggy.jpeg",
   "/images/up.jpeg",

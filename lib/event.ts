@@ -7,7 +7,7 @@ export const event = {
   dateLabel: "November 7, 2026",
   // Plain-text address used to build the embedded map + the "Open in Maps" link.
   // Be as specific as you can — exact address works best.
-  mapQuery: "InterContinental Mzaar Lebanon, Mzaar Kfardebian",
+  mapQuery: "Lancaster Eden Bay Hotel, Beirut, Lebanon",
   // ISO string, drives the live countdown on screen 3
   isoDateTime: "2026-11-07T16:00:00+03:00",
   // The vertical timeline on screen 2 (date / location card). Add as many
@@ -16,8 +16,8 @@ export const event = {
     {
       time: "4:00 PM · Nov 7",
       label: "Welcome Reception",
-      venue: "InterContinental Mzaar",
-      city: "Mzaar, Lebanon",
+      venue: "Lancaster Eden Bay Hotel",
+      city: "Beirut, Lebanon",
     },
   ],
   // The full program, split across separate screens — one segment per screen.
