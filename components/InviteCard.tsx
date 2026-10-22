@@ -6,6 +6,7 @@ import RSVPForm from "./RSVPForm";
 import ScheduleSlide from "./ScheduleSlide";
 import { event } from "@/lib/event";
 import MusicToggle from "@/components/MusicToggle";
+import Image from "next/image";
 /**
  * A different photo per screen. Drop your photos into /public/images
  * named exactly photo-1.jpg through photo-5.jpg (date/location, program,
@@ -404,8 +405,19 @@ export default function InviteCard({ name, slug }: { name: string; slug: string 
         </div>
 
         {/* Panel 4 — Countdown */}
-        <div className="relative h-full w-screen flex-shrink-0">
-          <VideoBackground src="/images/countdown-bg.mp4" active={index === 3} />
+<div className="relative h-full w-screen flex-shrink-0">
+  <div className="absolute inset-0 -z-10 overflow-hidden bg-white">
+    <Image
+      src="/images/countdown-bg.jpeg"
+      alt=""
+      fill
+      priority={index === 3}
+      className="object-cover"
+    />
+    <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/60" />
+    <div className="absolute inset-0 bg-black/5" />
+    <div className="absolute inset-0 bg-grain" />
+  </div>
           <motion.div
             variants={container}
             initial="hidden"
