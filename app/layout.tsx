@@ -20,8 +20,8 @@ const body = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Medispharm & AWMU — You're Invited",
-  description: "Medispharm and AWMU invite you to celebrate with us.",
+  title: "Medispharm & ESA — You're Invited",
+  description: "Medispharm and ESA invite you to celebrate with us.",
 };
 
 export const viewport: Viewport = {
