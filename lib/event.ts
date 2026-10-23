@@ -32,7 +32,7 @@ export const event = {
       items: [
         { time: "4:00 PM – 4:30 PM", label: "Welcome Reception" },
         { time: "4:30 PM – 5:00 PM", label: "Certificate Awarding Ceremony" },
-        { time: "5:00 PM – 7:00 PM", label: "Seated Lebanese Lunch" },
+        { time: "5:00 PM – 7:00 PM", label: "Seated Lebanese Early Dinner" },
         { time: "7:00 PM", label: "Cake-Cutting Ceremony" },
       ],
       dressCode: "",

@@ -8,12 +8,9 @@ type Choice = "yes" | "no";
 
 export default function RSVPForm({ name, slug }: { name: string; slug: string }) {
   const [attending, setAttending] = useState<Choice | null>(null);
-  const [plusOne, setPlusOne] = useState<Choice | null>(null);
   const [status, setStatus] = useState<Status>("idle");
 
-  // The plus-one question only makes sense if they're actually coming.
-  const needsPlusOne = attending === "yes";
-  const canConfirm = attending === "no" || (attending === "yes" && plusOne !== null);
+  const canConfirm = attending !== null;
 
   async function submit() {
     if (!canConfirm) return;
@@ -22,12 +19,7 @@ export default function RSVPForm({ name, slug }: { name: string; slug: string })
       const res = await fetch("/api/rsvp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          slug,
-          attending,
-          plusOne: needsPlusOne ? plusOne : null,
-        }),
+        body: JSON.stringify({ name, slug, attending }),
       });
       if (!res.ok) throw new Error("request failed");
       setStatus("done");
@@ -47,9 +39,7 @@ export default function RSVPForm({ name, slug }: { name: string; slug: string })
           {attending === "yes" ? "We look forward to seeing you." : "Thank you for letting us know."}
         </p>
         {attending === "yes" && (
-          <p className="mt-2 text-sm text-[#0b4878]/60">
-            {plusOne === "yes" ? "See you and your plus one there." : "See you there."}
-          </p>
+          <p className="mt-2 text-sm text-[#0b4878]/60">See you there.</p>
         )}
         <p className="mt-3 text-sm text-[#0b4878]/60">Your response has been recorded.</p>
       </motion.div>
@@ -62,10 +52,7 @@ export default function RSVPForm({ name, slug }: { name: string; slug: string })
         {(["yes", "no"] as const).map((choice) => (
           <button
             key={choice}
-            onClick={() => {
-              setAttending(choice);
-              if (choice === "no") setPlusOne(null);
-            }}
+            onClick={() => setAttending(choice)}
             className={`rounded-sm border px-6 py-2 text-sm uppercase tracking-[0.15em] transition-colors ${
   attending === choice
     ? "border-[#0b4878] bg-[#0b4878] text-white"
@@ -76,31 +63,6 @@ export default function RSVPForm({ name, slug }: { name: string; slug: string })
           </button>
         ))}
       </div>
-
-      {needsPlusOne && (
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-6 flex flex-col items-center gap-3"
-        >
-          <p className="text-xs uppercase tracking-[0.2em] text-[#0b4878]/70">Bringing a plus one?</p>
-          <div className="flex justify-center gap-3">
-            {(["yes", "no"] as const).map((choice) => (
-              <button
-                key={choice}
-                onClick={() => setPlusOne(choice)}
-                className={`rounded-sm border px-6 py-1.5 text-xs uppercase tracking-[0.15em] transition-colors ${
-  plusOne === choice
-    ? "border-[#0b4878] bg-[#0b4878] text-white"
-    : "border-[#0b4878]/40 text-[#0b4878]/80 hover:border-[#0b4878] hover:text-[#0b4878]"
-}`}
-              >
-                {choice === "yes" ? "Yes" : "No"}
-              </button>
-            ))}
-          </div>
-        </motion.div>
-      )}
 
       {attending && canConfirm && (
         <motion.div

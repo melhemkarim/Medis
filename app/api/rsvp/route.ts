@@ -7,13 +7,9 @@ const FROM_EMAIL = process.env.FROM_EMAIL || "invitations@yourdomain.com";
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, slug, attending, plusOne } = await req.json();
+    const { name, slug, attending } = await req.json();
 
     if (!name || !slug || (attending !== "yes" && attending !== "no")) {
-      return NextResponse.json({ error: "Invalid submission" }, { status: 400 });
-    }
-    // plusOne is only meaningful when attending — otherwise it must be null/undefined.
-    if (plusOne !== null && plusOne !== undefined && plusOne !== "yes" && plusOne !== "no") {
       return NextResponse.json({ error: "Invalid submission" }, { status: 400 });
     }
 
@@ -25,11 +21,9 @@ export async function POST(req: NextRequest) {
     }
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    const bringingPlusOne = attending === "yes" && plusOne === "yes";
-
     const subject =
       attending === "yes"
-        ? `✅ ${name} confirmed — attending${bringingPlusOne ? " (+1)" : ""}`
+        ? `✅ ${name} confirmed — attending`
         : `❌ ${name} declined the invitation`;
 
     await resend.emails.send({
@@ -40,11 +34,6 @@ export async function POST(req: NextRequest) {
         <div style="font-family: sans-serif; font-size: 15px; color: #24303A;">
           <p><strong>${name}</strong> responded to the Medispharm &amp; AWMU invitation.</p>
           <p>Status: <strong>${attending === "yes" ? "Attending" : "Not attending"}</strong></p>
-          ${
-            attending === "yes"
-              ? `<p>Plus one: <strong>${bringingPlusOne ? "Yes" : "No"}</strong></p>`
-              : ""
-          }
           <p style="color:#888; font-size:12px;">Invite slug: ${slug}</p>
         </div>
       `,
